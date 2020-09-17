@@ -15,17 +15,45 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language EN
+ * Task to proces new users created by wizard
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-block_createuser
+ * @package   block_createuser
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
-// Default.
-$string['pluginname'] = 'Create User';
 
-// Tasks.
-$string['task:process_new_users'] = 'Task process new users';
+namespace block_createuser\task;
 
+use core\task\scheduled_task;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Class process_new_users
+ *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @package   block_createuser
+ * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
+ * @author    Wishal Fakira
+ */
+class process_new_users extends scheduled_task {
+
+    /**
+     * @return \lang_string|string
+     * @throws \coding_exception
+     */
+    public function get_name() {
+        return get_string('task:process_new_users', 'block_createuser');
+    }
+
+    /**
+     * Do the job.
+     * Throw exceptions on errors (the job will be retried).
+     */
+    public function execute() {
+        mtrace('block_createuser: ' . __CLASS__);
+    }
+}

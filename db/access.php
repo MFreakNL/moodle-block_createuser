@@ -26,11 +26,32 @@
 defined('MOODLE_INTERNAL') || die;
 
 $capabilities = [
-    'block/createuser:administration' => [
-        'captype' => 'view',
-        'contextlevel' => CONTEXT_SYSTEM,
+    'block/createuser:manager' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => [
             'manager' => CAP_ALLOW,
         ],
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+
+    'block/createuser:addinstance' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+
+    'block/createuser:myaddinstance' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
     ],
 ];

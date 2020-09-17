@@ -15,17 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language EN
+ *
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-block_createuser
+ * @package   block_createuser
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
-// Default.
-$string['pluginname'] = 'Create User';
 
-// Tasks.
-$string['task:process_new_users'] = 'Task process new users';
+namespace block_createuser;
 
+defined('MOODLE_INTERNAL') || die;
+
+/**
+ * Class helper
+ *
+ * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
+ * @author    Wishal Fakira
+ */
+class  helper{
+
+    public function form_data() {
+
+
+
+    }
+
+
+
+
+}

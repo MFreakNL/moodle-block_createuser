@@ -19,13 +19,13 @@
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-block_createuser
+ * @package   block_createuser
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2020091600;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release = '3.7.0';
+
+$plugin->version = 2020091601;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->release = '3.9.0';
 $plugin->requires = 2019052000;        // 3.7.
 $plugin->component = 'block_createuser'; // Full name of the plugin (used for diagnostics).
-;

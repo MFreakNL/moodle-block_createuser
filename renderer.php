@@ -25,6 +25,7 @@
  **/
 
 defined('MOODLE_INTERNAL') || die;
+
 require_once($CFG->libdir . '/tablelib.php');
 
 /**
@@ -51,7 +52,8 @@ class block_createuser_renderer extends plugin_renderer_base {
 
     public function table_wizard_users() : string {
         $templatedata = new stdClass();
-        $templatedata->users = [['firstname' =>'test']];
+        $templatedata->users = \block_createuser\helper::get_all_users();
+
         return $this->render_from_template('block_createuser/overview_users',
             $templatedata);
     }

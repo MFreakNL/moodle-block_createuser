@@ -29,3 +29,25 @@ $string['pluginname'] = 'Create User';
 // Tasks.
 $string['task:process_new_users'] = 'Task process new users';
 
+// Form.
+$string['form:firstname'] = 'First name';
+$string['form:lastname'] = 'last name';
+$string['form:email'] = 'Email';
+
+//error
+$string['error:firstname'] = 'First name is required';
+$string['error:lastname'] = 'last name is required';
+$string['error:email'] = 'Invalid email address';
+$string['error:email_used'] = 'Email adress already used';
+// Buttons.
+$string['btn:submit'] = 'Send';
+$string['btn:delete'] = 'Delete';
+$string['btn:add'] = 'Add';
+$string['btn:admin'] = 'Add Users';
+
+// Heading
+$string['heading:table_firstname'] = 'First name';
+$string['heading:table_lastname'] = 'last name';
+$string['heading:table_email'] = 'Email';
+$string['heading:table_action'] = 'Action';
+$string['text:usersadded'] = 'User Added';

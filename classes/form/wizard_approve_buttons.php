@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Task to proces new users created by wizard
+ *
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -24,18 +24,16 @@
  * @author    Wishal Fakira
  **/
 
-namespace block_createuser\task;
+namespace block_createuser\form;
+
+defined('MOODLE_INTERNAL') || die;
 
 global $CFG;
-require_once($CFG->dirroot.'/user/lib.php');
 
-use block_createuser\users;
-use core\task\scheduled_task;
-
-defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir . '/formslib.php');
 
 /**
- * Class process_new_users
+ * Class wizard_approve_buttons
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -43,30 +41,12 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  */
-class process_new_users extends scheduled_task {
+class wizard_approve_buttons extends \moodleform {
 
-    /**
-     * @return \lang_string|string
-     * @throws \coding_exception
-     */
-    public function get_name() {
-        return get_string('task:process_new_users', 'block_createuser');
-    }
+    protected function definition() {
 
-    /**
-     * Do the job.
-     * Throw exceptions on errors (the job will be retried).
-     */
-    public function execute() {
-        global $DB;
 
-        $wizarddata = $DB->get_records('block_createuser', [
-            'is_processed' => 0,
-        ]);
+        $this->add_action_buttons(false, get_string('btn:submit', 'block_createuser'));
 
-        foreach ($wizarddata as $data) {
-            users::create_users(unserialize($data->usersdata));
-
-        }
     }
 }

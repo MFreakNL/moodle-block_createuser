@@ -24,52 +24,81 @@
  * @author    Wishal Fakira
  **/
 
-require_once(__DIR__ . '/../../../config.php');
+use block_createuser\form\form_new_users;
+use block_createuser\form\wizard_approve_buttons;
+use block_createuser\formwizard;
+use block_createuser\helper;
+use block_createuser\users;
 
+require_once(__DIR__ . '/../../../config.php');
 defined('MOODLE_INTERNAL') || die();
 
 $blockid = required_param('blockid', PARAM_INT);
 $action = optional_param('action', '', PARAM_TEXT);
+$index = optional_param('index', 0, PARAM_INT);
 
 $blockcontext = context_block::instance($blockid);
 
 require_login();
-
 require_capability('block/createuser:manager', $blockcontext);
 
-$PAGE->set_url('/blocks/createuser/view/wizard.php', ['blockid' => $blockid, 'action' => $action]);
+$PAGE->set_url('/blocks/createuser/view/wizard.php', [
+    'blockid' => $blockid,
+    'action' => $action,
+    'index' => $index,
+]);
 
 $PAGE->set_context($blockcontext);
 $PAGE->set_heading($SITE->fullname);
+
 /** @var block_createuser_renderer $renderer */
 $renderer = $PAGE->get_renderer('block_createuser');
 switch ($action) {
+    case 'addtask':
+        users::create_task_form_wizard($SESSION->block_createuser);
 
-    case 'confirm':
-//        echo '<pre>';print_r($SESSION);echo '</pre>';die(__LINE__.' '.__FILE__);
+        redirect(new moodle_url('/', [
 
-        echo $OUTPUT->header();
+        ]), get_string('text:usersadded', 'block_createuser'));
 
-        echo $renderer->table_wizard_users();
-        echo $form->render();
-        echo $OUTPUT->footer();
+        break;
+
+    case 'deleteuser':
+        formwizard::delete_user($index);
+        redirect(new moodle_url($PAGE->url->get_path(), [
+            'blockid' => $blockid,
+            'action' => '',
+        ]));
         break;
 
     default:
-        $form = new \block_createuser\form\form_new_users($PAGE->url);
-        if ($form->is_cancelled()) {
+
+        $formadduser = new form_new_users($PAGE->url);
+        $formapprovebtn = new wizard_approve_buttons(new moodle_url($PAGE->url->get_path(), [
+            'blockid' => $blockid,
+            'action' => 'addtask',
+            'index' => $index,
+        ]));
+
+        if ($formadduser->is_cancelled()) {
             redirect(new moodle_url('/'));
         }
+        if (($data = $formadduser->get_data()) != false) {
 
-        if (($data = $form->get_data()) != false) {
-            $SESSION->block_createuser = serialize($data);
+            formwizard::add_user($data);
             redirect(new moodle_url('/blocks/createuser/view/wizard.php', [
-                'action' => 'confirm',
+                'action' => '',
                 'blockid' => $blockid,
             ]));
         }
 
         echo $OUTPUT->header();
-        echo $form->render();
+        echo $formadduser->render();
+        echo $renderer->table_wizard_users();
+
+        if (!empty($SESSION->block_createuser)) {
+            echo $formapprovebtn->render();
+        }
+
         echo $OUTPUT->footer();
 }

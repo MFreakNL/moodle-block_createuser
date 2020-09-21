@@ -47,17 +47,31 @@ class form_new_users extends \moodleform {
 
         $mform = &$this->_form;
 
-        $mform->addElement('text', 'firstname', get_string('form:firstname'));
+        $mform->addElement('text', 'firstname', get_string('form:firstname', 'block_createuser'));
         $mform->setType('firstname', PARAM_TEXT);
+        $mform->addRule('firstname', get_string('error:firstname', 'block_createuser'), 'required', null, 'client');
 
-        $mform->addElement('text', 'lastname', get_string('form:lastname'));
+        $mform->addElement('text', 'lastname', get_string('form:lastname', 'block_createuser'));
         $mform->setType('lastname', PARAM_TEXT);
+        $mform->addRule('lastname', get_string('error:lastname', 'block_createuser'), 'required', null, 'client');
 
-        $mform->addElement('text', 'firstname', get_string('form:firstname'));
-        $mform->setType('firstname', PARAM_TEXT);
+        $mform->addElement('text', 'email', get_string('form:email', 'block_createuser'));
+        $mform->setType('email', PARAM_EMAIL);
+        $mform->addRule('email', get_string('error:email', 'block_createuser'), 'required', null, 'client');
 
+        $this->add_action_buttons(true, get_string('btn:add', 'block_createuser'));
+    }
 
+    function validation($data, $files) {
+        global $DB;
+        $errors = parent::validation($data, $files);
+        if ($DB->record_exists('user', ['email' => $data['email']])) {
+            $errors['email'] = get_string('error:email_used', 'block_createuser');
+        }
+        if ($DB->record_exists('user', ['username' => $data['email']])) {
+            $errors['email'] = get_string('error:username_used', 'block_createuser');
+        }
 
-        $this->add_action_buttons(true, get_string('btn:submit', 'block_createuser'));
+        return $errors;
     }
 }

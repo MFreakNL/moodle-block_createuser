@@ -26,6 +26,8 @@
 
 namespace block_createuser;
 
+use ArrayIterator;
+
 defined('MOODLE_INTERNAL') || die;
 
 /**
@@ -34,15 +36,28 @@ defined('MOODLE_INTERNAL') || die;
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  */
-class  helper{
+class helper {
 
-    public function form_data() {
+    /**
+     * @return ArrayIterator
+     * @throws \moodle_exception
+     */
+    public static function get_all_users() : ArrayIterator {
+        global $SESSION, $PAGE;
+        $users = [];
+        $formdata = $SESSION->block_createuser ?? [];
 
+        foreach ($formdata as $i => $user) {
+            $user->actionurl = (new \moodle_url('/blocks/createuser/view/wizard.php', [
+                'index' => $i,
+                'action' => 'deleteuser',
+                'blockid' => $PAGE->url->get_param('blockid'),
+            ]))->out(false);
+            $users[$i] = $user;
+        }
 
-
+        return new ArrayIterator($users);
     }
-
-
 
 
 }

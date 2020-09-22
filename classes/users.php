@@ -51,33 +51,98 @@ class users {
             'createdby' => $USER->id,
 
         ]);
-
     }
 
     /**
      * @param $user
      */
-    protected static function create_single_user($user) : void {
+    protected static function create_single_user($user, int $createdby) : void {
 
         global $DB;
+        try {
+            $user->username = $user->email;
+            $user->lang = 'nl';
+            $user->id = user_create_user($user, false, false);
 
-        $user->username = $user->email;
-        $user->lang = 'nl';
-        $user->id = user_create_user($user, false, false);
+            $user = $DB->get_record('user', ['id' => $user->id]);
+            $fieldid = get_config('block_createuser', 'profile_user_link');
 
-        $user = $DB->get_record('user', ['id' => $user->id]);
-            echo '<pre>';print_r($user);echo '</pre>';
-        setnew_password_and_mail($user);
-        unset_user_preference('create_password', $user);
-        set_user_preference('auth_forcepasswordchange', 1, $user);
+            if (!empty($fieldid)) {
+                helper::update_user_profile_value($user->id, $fieldid, $createdby);
+            }
+
+            // Sends email with password to user.
+            setnew_password_and_mail($user);
+            unset_user_preference('create_password', $user);
+            set_user_preference('auth_forcepasswordchange', 1, $user);
+            $courseids = helper::get_courseids_from_settings();
+
+            // Enrol users to all courses.
+            array_walk($courseids, 'static::enrol', ['user' => $user]);
+
+        } catch (\Exception $exception) {
+            mtrace('Error creating user: ' . $exception->getMessage());
+        }
+
+    }
+
+    public static function unset_session() : void {
+        global $SESSION;
+        unset($SESSION->block_createuser);
     }
 
     /**
-     * @param $users
+     * @param array $users
+     * @param int   $createdby
      */
-    public static function create_users(array $users) : void {
-
-        array_map('static::create_single_user', $users);
+    public static function create_users(array $users, int $createdby) : void {
+        array_map('static::create_single_user', $users, [$createdby]);
     }
+
+    /**
+     * @param int       $courseid
+     * @param \stdClass $user
+     *
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
+     */
+    public static function enrol(int $courseid, $key, $userdata) : void {
+        global $DB;
+
+        $user = $userdata['user'];
+        if (empty($user)) {
+            return;
+        }
+        // Check if we need to enrol users for a new course.
+
+        $enrol = enrol_get_plugin('manual');
+
+        if ($enrol === null) {
+            return;
+        }
+
+        $instance = $DB->get_record('enrol', [
+            'courseid' => $courseid,
+            'enrol' => 'manual',
+        ], '*');
+
+        if (empty($instance)) {
+            return;
+        }
+
+        $now = time();
+        $period = get_config('block_createuser', 'enrolment_duration');
+        $timeend = $now + $period;
+        $enrol->enrol_user($instance,
+            $user->id,
+            get_config('block_createuser', 'role'),
+            $now,
+            $timeend,
+            ENROL_USER_ACTIVE,
+            true
+        );
+    }
+
 }
  

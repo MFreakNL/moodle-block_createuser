@@ -27,7 +27,7 @@
 namespace block_createuser\task;
 
 global $CFG;
-require_once($CFG->dirroot.'/user/lib.php');
+require_once($CFG->dirroot . '/user/lib.php');
 
 use block_createuser\users;
 use core\task\scheduled_task;
@@ -65,8 +65,12 @@ class process_new_users extends scheduled_task {
         ]);
 
         foreach ($wizarddata as $data) {
-            users::create_users(unserialize($data->usersdata));
-
+            users::create_users(unserialize($data->usersdata), $data->createdby);
         }
+
+        $DB->delete_records('block_createuser', [
+            'is_processed' => 0,
+        ]);
+
     }
 }

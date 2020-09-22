@@ -27,6 +27,7 @@
 namespace block_createuser;
 
 use ArrayIterator;
+use stdClass;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -59,5 +60,89 @@ class helper {
         return new ArrayIterator($users);
     }
 
+    /**
+     * @return array
+     * @throws \dml_exception
+     */
+
+    public static function get_courseids_from_settings() : array {
+        $results = [];
+        $courseids = get_config('block_createuser', 'courseids');
+        $courseids = explode(',', $courseids);
+
+        foreach ($courseids as $courseid) {
+            if (is_numeric($courseid) === false) {
+                continue;
+            }
+            $results[$courseid] = $courseid;
+        }
+
+        return $results;
+    }
+
+    /**
+     * @return array
+     * @throws \dml_exception
+     */
+    public static function get_all_roles() : array {
+        global $DB;
+
+        return $DB->get_records_menu('role', null, 'sortorder ASC', 'id,shortname');
+    }
+
+    /**
+     * Get all available profile fields
+     *
+     * @return arra
+     * @throws \dml_exception
+     */
+    public static function get_profile_fields() : array {
+        global $CFG, $DB;
+        require_once($CFG->dirroot . '/user/profile/lib.php');
+        require_once($CFG->dirroot . '/user/profile/definelib.php');
+        $rs = $DB->get_recordset_sql("SELECT f.* FROM {user_info_field} f ORDER BY name ASC");
+        $fields = ['' => ''];
+        foreach ($rs as $field) {
+            $fields[$field->id] = $field->name;
+        }
+        $rs->close();
+        if (empty($fields)) {
+            return [];
+        }
+
+        return $fields;
+    }
+
+    /**
+     * @param int    $userid
+     * @param int    $fieldid
+     * @param string $value
+     *
+     * @throws \dml_exception
+     */
+    public static function update_user_profile_value(int $userid, $fieldid, string $value) : void {
+        global $DB;
+
+        $row = $DB->get_record('user_info_data', [
+            'userid' => $userid,
+            'fieldid' => $fieldid,
+        ]);
+
+        $dataObject = new stdClass();
+        $dataObject->userid = $userid;
+        $dataObject->fieldid = $fieldid;
+        $dataObject->data = s($value);
+
+        if (!$row) {
+            $DB->insert_record('user_info_data', $dataObject);
+
+            return;
+        }
+
+        if ($value !== $row->data) {
+            $dataObject->id = $row->id;
+            $DB->update_record('user_info_data', $dataObject);
+        }
+    }
 
 }

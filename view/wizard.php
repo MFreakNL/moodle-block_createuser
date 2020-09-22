@@ -27,7 +27,6 @@
 use block_createuser\form\form_new_users;
 use block_createuser\form\wizard_approve_buttons;
 use block_createuser\formwizard;
-use block_createuser\helper;
 use block_createuser\users;
 
 require_once(__DIR__ . '/../../../config.php');
@@ -56,7 +55,7 @@ $renderer = $PAGE->get_renderer('block_createuser');
 switch ($action) {
     case 'addtask':
         users::create_task_form_wizard($SESSION->block_createuser);
-
+        users::unset_session();
         redirect(new moodle_url('/', [
 
         ]), get_string('text:usersadded', 'block_createuser'));
@@ -99,6 +98,5 @@ switch ($action) {
         if (!empty($SESSION->block_createuser)) {
             echo $formapprovebtn->render();
         }
-
         echo $OUTPUT->footer();
 }

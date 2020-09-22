@@ -44,10 +44,23 @@ $string['btn:submit'] = 'Send';
 $string['btn:delete'] = 'Delete';
 $string['btn:add'] = 'Add';
 $string['btn:admin'] = 'Add Users';
-
 // Heading
 $string['heading:table_firstname'] = 'First name';
 $string['heading:table_lastname'] = 'last name';
 $string['heading:table_email'] = 'Email';
 $string['heading:table_action'] = 'Action';
-$string['text:usersadded'] = 'User Added';
+$string['text:usersadded'] = 'Users will be added shortly.';
+
+//Settings.
+$string['settings:selectable_role'] = 'Select role';
+$string['settings:selectable_role_desc'] = 'Select default role';
+$string['settings:courseids'] = 'Course ids';
+$string['settings:courseids_desc'] = 'Course ids';
+$string['setting:enrolment_duration'] = 'Enrolment duration';
+$string['setting:enrolment_duration_desc'] = 'Enrolment duration';
+$string['setting:user_link'] = 'User link';
+$string['setting:user_link_desc'] = 'Users can be linked with this field';
+
+$string['createuser:manager'] = 'Manager';
+$string['createuser:addinstance'] = 'Add instance';
+$string['createuser:myaddinstance'] = 'My add instance';

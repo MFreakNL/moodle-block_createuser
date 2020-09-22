@@ -44,8 +44,6 @@ require_once($CFG->libdir . '/formslib.php');
 class wizard_approve_buttons extends \moodleform {
 
     protected function definition() {
-
-
         $this->add_action_buttons(false, get_string('btn:submit', 'block_createuser'));
 
     }

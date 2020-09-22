@@ -44,7 +44,6 @@ require_once($CFG->libdir . '/formslib.php');
 class form_new_users extends \moodleform {
 
     protected function definition() {
-
         $mform = &$this->_form;
 
         $mform->addElement('text', 'firstname', get_string('form:firstname', 'block_createuser'));
@@ -62,6 +61,19 @@ class form_new_users extends \moodleform {
         $this->add_action_buttons(true, get_string('btn:add', 'block_createuser'));
     }
 
+    /**
+     * Dummy stub method - override if you needed to perform some extra validation.
+     * If there are errors return array of errors ("fieldname"=>"error message"),
+     * otherwise true if ok.
+     *
+     * Server side rules do not work for uploaded files, implement serverside rules here if needed.
+     *
+     * @param array $data  array of ("fieldname"=>value) of submitted data
+     * @param array $files array of uploaded files "element_name"=>tmp_file_path
+     *
+     * @return array of "element_name"=>"error_description" if there are errors,
+     *         or an empty array if everything is OK (true allowed for backwards compatibility too).
+     */
     function validation($data, $files) {
         global $DB;
         $errors = parent::validation($data, $files);

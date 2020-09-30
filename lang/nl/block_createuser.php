@@ -43,7 +43,7 @@ $string['error:email_used'] = 'e-mailadres al in gebruik';
 $string['btn:submit'] = 'Verstuur';
 $string['btn:delete'] = 'Verwijder';
 $string['btn:add'] = 'Voeg toe';
-$string['btn:admin'] = 'Admin';
+$string['btn:admin'] = 'Toevoegen';
 
 // Heading
 $string['heading:table_firstname'] = 'Voornaam';

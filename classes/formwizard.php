@@ -39,7 +39,7 @@ class formwizard {
     /**
      * @param int $index
      */
-    public static function delete_user(int $index) {
+    public static function delete_user(int $index) : void {
         global $SESSION;
         unset($SESSION->block_createuser[$index]);
     }

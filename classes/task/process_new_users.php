@@ -57,7 +57,7 @@ class process_new_users extends scheduled_task {
      * Do the job.
      * Throw exceptions on errors (the job will be retried).
      */
-    public function execute() {
+    public function execute() : void {
         global $DB;
 
         $wizarddata = $DB->get_records('block_createuser', [

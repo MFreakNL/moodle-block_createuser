@@ -59,7 +59,6 @@ class process_new_users extends scheduled_task {
      */
     public function execute() {
         global $DB;
-
         $wizarddata = $DB->get_records('block_createuser', [
             'is_processed' => 0,
         ]);
@@ -71,6 +70,5 @@ class process_new_users extends scheduled_task {
         $DB->delete_records('block_createuser', [
             'is_processed' => 0,
         ]);
-
     }
 }

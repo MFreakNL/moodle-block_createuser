@@ -28,6 +28,7 @@ namespace block_createuser;
 
 defined('MOODLE_INTERNAL') || die;
 
+require_once($CFG->dirroot.'/group/lib.php');
 /**
  * Class create_users
  *
@@ -54,7 +55,8 @@ class users {
     }
 
     /**
-     * @param $user
+     * @param     $user
+     * @param int $createdby
      */
     protected static function create_single_user($user, int $createdby) : void {
 
@@ -78,7 +80,7 @@ class users {
             $courseids = helper::get_courseids_from_settings();
 
             // Enrol users to all courses.
-            array_walk($courseids, 'static::enrol', ['user' => $user]);
+            array_walk($courseids, 'static::enrol', ['user' => $user, 'createdby' => $createdby]);
 
         } catch (\Exception $exception) {
             mtrace('Error creating user: ' . $exception->getMessage());
@@ -142,7 +144,33 @@ class users {
             ENROL_USER_ACTIVE,
             true
         );
+        $groupsfrommanager = self::get_manager_groups($courseid, $userdata['createdby']);
+
+        if (empty($groupsfrommanager)) {
+            return;
+        }
+        foreach ($groupsfrommanager as $groups) {
+            foreach ($groups as $groupid) {
+                groups_add_member($groupid, $user->id);
+
+            }
+        }
     }
 
+    /**
+     * @param int $courseid
+     * @param int $createdby
+     */
+    private static function get_manager_groups(int $courseid, int $createdby) {
+        static $holder = [];
+        $key = $courseid . '-' . $createdby;
+
+        if (isset($holder[$key])) {
+            return $holder[$key];
+        }
+        $holder[$key] = groups_get_user_groups($courseid, $createdby);
+
+        return $holder[$key];
+    }
 }
  

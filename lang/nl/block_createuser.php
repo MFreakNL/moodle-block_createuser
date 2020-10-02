@@ -39,11 +39,12 @@ $string['error:firstname'] = 'Voornaam is verplicht!';
 $string['error:lastname'] = 'Achternaam is verplicht!';
 $string['error:email'] = 'Ongeldig e-mailadres';
 $string['error:email_used'] = 'e-mailadres al in gebruik';
+
 // Buttons.
-$string['btn:submit'] = 'Verstuur';
+$string['btn:submit'] = 'Bevestig toevoegen';
 $string['btn:delete'] = 'Verwijder';
 $string['btn:add'] = 'Voeg toe';
-$string['btn:admin'] = 'Admin';
+$string['btn:admin'] = 'Toevoegen';
 
 // Heading
 $string['heading:table_firstname'] = 'Voornaam';

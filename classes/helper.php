@@ -93,7 +93,7 @@ class helper {
     /**
      * Get all available profile fields
      *
-     * @return arra
+     * @return array
      * @throws \dml_exception
      */
     public static function get_profile_fields() : array {

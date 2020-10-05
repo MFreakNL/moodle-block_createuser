@@ -29,10 +29,14 @@ namespace block_createuser;
 defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->dirroot.'/group/lib.php');
+
 /**
  * Class create_users
  *
- * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @package   block_createuser
+ * @copyright 21-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  */
 class users {
@@ -102,12 +106,11 @@ class users {
     }
 
     /**
-     * @param int       $courseid
-     * @param \stdClass $user
+     * @param int $courseid
+     * @param     $key
+     * @param     $userdata
      *
      * @return void
-     * @throws \coding_exception
-     * @throws \dml_exception
      */
     public static function enrol(int $courseid, $key, $userdata) : void {
         global $DB;
@@ -160,6 +163,8 @@ class users {
     /**
      * @param int $courseid
      * @param int $createdby
+     *
+     * @return mixed
      */
     private static function get_manager_groups(int $courseid, int $createdby) {
         static $holder = [];
@@ -173,4 +178,3 @@ class users {
         return $holder[$key];
     }
 }
- 

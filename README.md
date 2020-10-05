@@ -8,7 +8,6 @@ In brief, the Mfreak `block_coursecreator` allows a Moodle manager to create eas
 * Author: Wishal Fakira
 * Min. required: Moodle 3.7.*
 * Supports PHP: 7.0 | 7.1 | 7.2 
-* License: [Avetica.nl](http://www.avetica.nl/)
 
 ![Moodle39](https://img.shields.io/badge/moodle-3.9-brightgreen.svg)
 ![PHP7.2](https://img.shields.io/badge/PHP-7.2-brightgreen.svg)

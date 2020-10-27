@@ -64,6 +64,7 @@ class process_new_users extends scheduled_task {
         ]);
 
         foreach ($wizarddata as $data) {
+            // @TODO check if we can remove this unserialize.
             users::create_users(unserialize($data->usersdata), $data->createdby);
         }
 

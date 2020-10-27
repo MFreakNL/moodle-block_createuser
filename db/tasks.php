@@ -23,8 +23,8 @@
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
-defined('MOODLE_INTERNAL') || die();
 
+defined('MOODLE_INTERNAL') || die();
 $tasks = [
     [
         'classname' => 'block_createuser\task\process_new_users',

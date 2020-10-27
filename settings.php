@@ -46,8 +46,8 @@ if ($ADMIN->fulltree) {
             PARAM_TEXT
         )
     );
-    $oneday = 86400;
 
+    $oneday = 86400;
     $settings->add(new admin_setting_configduration('block_createuser/enrolment_duration',
         get_string('setting:enrolment_duration', 'block_createuser'),
         get_string('setting:enrolment_duration_desc', 'block_createuser'), $oneday * 60));

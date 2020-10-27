@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * Helper functions
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -34,6 +34,7 @@ defined('MOODLE_INTERNAL') || die;
 /**
  * Class helper
  *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  */
@@ -114,13 +115,15 @@ class helper {
     }
 
     /**
+     * update_user_profile_value
+     *
      * @param int    $userid
      * @param int    $fieldid
      * @param string $value
      *
      * @throws \dml_exception
      */
-    public static function update_user_profile_value(int $userid, $fieldid, string $value) : void {
+    public static function update_user_profile_value(int $userid, int $fieldid, string $value) : void {
         global $DB;
 
         $row = $DB->get_record('user_info_data', [

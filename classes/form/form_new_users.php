@@ -43,6 +43,9 @@ require_once($CFG->libdir . '/formslib.php');
  */
 class form_new_users extends \moodleform {
 
+    /**
+     * 
+     */
     protected function definition() : void {
         $mform = &$this->_form;
 

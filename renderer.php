@@ -50,6 +50,9 @@ class block_createuser_renderer extends plugin_renderer_base {
             new lang_string('btn:admin', 'block_createuser'), ['class' => 'btn btn-primary']);
     }
 
+    /**
+     * @return string
+     */
     public function table_wizard_users() : string {
         $templatedata = new stdClass();
         $templatedata->users = \block_createuser\helper::get_all_users();

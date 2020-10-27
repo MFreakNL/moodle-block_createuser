@@ -30,8 +30,15 @@ defined('MOODLE_INTERNAL') || die;
 
 /**
  * Privacy Subsystem for core_admin implementing null_provider.
+ *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @package   moodle-block_createuser
+ * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
+ * @author    Wishal Fakira
  */
 class provider implements \core_privacy\local\metadata\null_provider {
+
     /**
      * Get the language string identifier with the component's language
      * file to explain why this plugin stores no data.

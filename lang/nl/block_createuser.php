@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language EN
+ * Language NL
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -23,6 +23,7 @@
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
+
 // Default.
 $string['pluginname'] = 'Gebruikers toevoegen';
 
@@ -34,7 +35,7 @@ $string['form:firstname'] = 'Voornaam';
 $string['form:lastname'] = 'Achternaam';
 $string['form:email'] = 'Email';
 
-//error
+// Error.
 $string['error:firstname'] = 'Voornaam is verplicht!';
 $string['error:lastname'] = 'Achternaam is verplicht!';
 $string['error:email'] = 'Ongeldig e-mailadres';
@@ -53,7 +54,7 @@ $string['heading:table_email'] = 'E-mail';
 $string['heading:table_action'] = 'Actie';
 $string['text:usersadded'] = 'De gebruikers worden z.s.m. aangemaakt.';
 
-//Settings.
+// Settings.
 $string['settings:selectable_role'] = 'Selecteer rol';
 $string['settings:selectable_role_desc'] = 'Selecteer standaard rol';
 $string['settings:courseids'] = 'Cursus ids';

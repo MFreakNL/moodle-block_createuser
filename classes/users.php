@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * Users related functions
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -27,11 +27,10 @@
 namespace block_createuser;
 
 defined('MOODLE_INTERNAL') || die;
-
 require_once($CFG->dirroot.'/group/lib.php');
 
 /**
- * Class create_users
+ * Class users
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -42,23 +41,29 @@ require_once($CFG->dirroot.'/group/lib.php');
 class users {
 
     /**
-     * @param $users
+     * create_task_form_wizard
+     *
+     * @param array $users
+     * @throws \dml_exception
      */
     public static function create_task_form_wizard(array $users) : void {
         global $DB, $USER;
         if (empty($users)) {
             return;
         }
+
+        // @TODO check if we can remove this serialize.
         $DB->insert_record('block_createuser', (object)[
             'usersdata' => serialize($users),
             'is_processed' => 0,
             'timecreated' => time(),
             'createdby' => $USER->id,
-
         ]);
     }
 
     /**
+     * create_single_user
+     *
      * @param     $user
      * @param int $createdby
      */
@@ -89,15 +94,19 @@ class users {
         } catch (\Exception $exception) {
             mtrace('Error creating user: ' . $exception->getMessage());
         }
-
     }
 
+    /**
+     * unset_session
+     */
     public static function unset_session() : void {
         global $SESSION;
         unset($SESSION->block_createuser);
     }
 
     /**
+     * create_users
+     *
      * @param array $users
      * @param int   $createdby
      */
@@ -111,6 +120,8 @@ class users {
      * @param     $userdata
      *
      * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     public static function enrol(int $courseid, $key, $userdata) : void {
         global $DB;
@@ -119,8 +130,8 @@ class users {
         if (empty($user)) {
             return;
         }
-        // Check if we need to enrol users for a new course.
 
+        // Check if we need to enrol users for a new course.
         $enrol = enrol_get_plugin('manual');
 
         if ($enrol === null) {
@@ -152,10 +163,10 @@ class users {
         if (empty($groupsfrommanager)) {
             return;
         }
+
         foreach ($groupsfrommanager as $groups) {
             foreach ($groups as $groupid) {
                 groups_add_member($groupid, $user->id);
-
             }
         }
     }

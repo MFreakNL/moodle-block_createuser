@@ -1,5 +1,5 @@
 ## Moodle - block createuser
-This plugin allows a manager ("block/createuser:manager") to access a wizard to create new users on a user friendly way. 
+This plugin allows a manager ("block/createuser:manager") to access a wizard to create new users on a user-friendly way. 
 
 ## Wizard
 ![Screenshot2](pix/screen1.png)

@@ -117,9 +117,9 @@ class users {
     /**
      * Enrol
      *
-     * @param int $courseid
-     * @param     $key
-     * @param     $userdata
+     * @param int   $courseid
+     * @param int   $key
+     * @param array $userdata
      *
      * @return void
      * @throws \coding_exception

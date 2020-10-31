@@ -19,7 +19,7 @@
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-block_createuser
+ * @package   block_createuser
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
@@ -54,7 +54,7 @@ $string['heading:table_email'] = 'Email';
 $string['heading:table_action'] = 'Action';
 $string['text:usersadded'] = 'Users will be added shortly.';
 
-//Settings.
+// Settings.
 $string['settings:selectable_role'] = 'Select role';
 $string['settings:selectable_role_desc'] = 'Select default role';
 $string['settings:courseids'] = 'Course ids';

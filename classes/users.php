@@ -68,11 +68,14 @@ class users {
      * @param array $data
      */
     protected static function create_single_user(array $user, int $key, array $data) : void {
-        global $DB;
+        global $DB, $CFG;
         try {
             $user = (object)$user;
             $user->username = strtolower($user->email);
-            $user->lang = 'nl';
+            $user->mnethostid = $CFG->mnet_localhost_id;
+            $user->lang = $CFG->lang;
+            $user->calendartype = $CFG->calendartype;
+
             $user->id = user_create_user($user, false, false);
 
             $user = $DB->get_record('user', ['id' => $user->id]);

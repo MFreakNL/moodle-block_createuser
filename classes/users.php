@@ -27,7 +27,7 @@
 namespace block_createuser;
 
 defined('MOODLE_INTERNAL') || die;
-require_once($CFG->dirroot.'/group/lib.php');
+require_once($CFG->dirroot . '/group/lib.php');
 
 /**
  * Class users
@@ -44,6 +44,7 @@ class users {
      * Create task from wizard
      *
      * @param array $users
+     *
      * @throws \dml_exception
      */
     public static function create_task_form_wizard(array $users) : void {
@@ -52,9 +53,8 @@ class users {
             return;
         }
 
-        // @TODO check if we can remove this serialize.
         $DB->insert_record('block_createuser', (object)[
-            'usersdata' => serialize($users),
+            'usersdata' => json_encode($users),
             'is_processed' => 0,
             'timecreated' => time(),
             'createdby' => $USER->id,
@@ -64,14 +64,14 @@ class users {
     /**
      * create_single_user
      *
-     * @param     $user
-     * @param int $createdby
+     * @param array $user
+     * @param array $data
      */
-    protected static function create_single_user($user, int $createdby) : void {
-
+    protected static function create_single_user(array $user, int $key, array $data) : void {
         global $DB;
         try {
-            $user->username = $user->email;
+            $user = (object)$user;
+            $user->username = strtolower($user->email);
             $user->lang = 'nl';
             $user->id = user_create_user($user, false, false);
 
@@ -79,7 +79,7 @@ class users {
             $fieldid = get_config('block_createuser', 'profile_user_link');
 
             if (!empty($fieldid)) {
-                helper::update_user_profile_value($user->id, $fieldid, $createdby);
+                helper::update_user_profile_value($user->id, $fieldid, $data['createdby']);
             }
 
             // Sends email with password to user.
@@ -89,7 +89,7 @@ class users {
             $courseids = helper::get_courseids_from_settings();
 
             // Enrol users to all courses.
-            array_walk($courseids, 'static::enrol', ['user' => $user, 'createdby' => $createdby]);
+            array_walk($courseids, 'static::enrol', ['user' => $user, 'createdby' => $data['createdby']]);
 
         } catch (\Exception $exception) {
             mtrace('Error creating user: ' . $exception->getMessage());
@@ -111,7 +111,7 @@ class users {
      * @param int   $createdby
      */
     public static function create_users(array $users, int $createdby) : void {
-        array_map('static::create_single_user', $users, [$createdby]);
+        array_walk($users, 'static::create_single_user', ['createdby' => $createdby]);
     }
 
     /**
@@ -174,6 +174,8 @@ class users {
     }
 
     /**
+     * Get manager groups
+     *
      * @param int $courseid
      * @param int $createdby
      *

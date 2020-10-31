@@ -57,9 +57,7 @@ switch ($action) {
     case 'addtask':
         users::create_task_form_wizard($SESSION->block_createuser);
         users::unset_session();
-        redirect(new moodle_url('/', [
-
-        ]), get_string('text:usersadded', 'block_createuser'));
+        redirect(new moodle_url('/'), get_string('text:usersadded', 'block_createuser'));
 
         break;
 
@@ -85,7 +83,12 @@ switch ($action) {
         }
         if (($data = $formadduser->get_data()) != false) {
 
-            formwizard::add_user($data);
+            formwizard::add_user((object)[
+                'firstname' => $data->firstname,
+                'lastname' => $data->lastname,
+                'email' => strtolower($data->email),
+            ]);
+
             redirect(new moodle_url('/blocks/createuser/view/wizard.php', [
                 'action' => '',
                 'blockid' => $blockid,

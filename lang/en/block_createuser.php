@@ -39,7 +39,7 @@ $string['form:email'] = 'Email';
 $string['error:firstname'] = 'First name is required';
 $string['error:lastname'] = 'last name is required';
 $string['error:email'] = 'Invalid email address';
-$string['error:email_used'] = 'Email adress already used';
+$string['error:username_used'] = 'Email adress already used';
 
 // Buttons.
 $string['btn:submit'] = 'Create users';

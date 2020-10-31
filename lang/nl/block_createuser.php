@@ -39,7 +39,7 @@ $string['form:email'] = 'Email';
 $string['error:firstname'] = 'Voornaam is verplicht!';
 $string['error:lastname'] = 'Achternaam is verplicht!';
 $string['error:email'] = 'Ongeldig e-mailadres';
-$string['error:email_used'] = 'e-mailadres al in gebruik';
+$string['error:username_used'] = 'e-mailadres al in gebruik';
 
 // Buttons.
 $string['btn:submit'] = 'Bevestig toevoegen';

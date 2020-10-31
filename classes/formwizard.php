@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * Form wizard
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -31,14 +31,17 @@ use stdClass;
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Class create_users
+ * Class formwizard
  *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  */
 class formwizard {
 
     /**
+     * add_user
+     *
      * @param stdClass $data
      */
     public static function add_user(stdClass $data) : void {
@@ -53,6 +56,8 @@ class formwizard {
     }
 
     /**
+     * delete_user
+     *
      * @param int $index
      */
     public static function delete_user(int $index) : void {

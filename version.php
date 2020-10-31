@@ -25,7 +25,8 @@
  **/
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020092200;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version = 2020092200;
 $plugin->release = '3.9.0';
-$plugin->requires = 2019052000;        // 3.7.
-$plugin->component = 'block_createuser'; // Full name of the plugin (used for diagnostics).
+$plugin->requires = 2019052000;
+$plugin->component = 'block_createuser';
+$plugin->maturity = MATURITY_STABLE;

@@ -19,6 +19,27 @@
     @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
     @author    Wishal Fakira
 }}
+{{!
+ @template block_createuser/overview_users
+
+    Users overview
+
+    Context variables required for this template:
+    * firstname - The firstname of the new user
+    * lastname - The lastname of the new user
+    * email - The e-mail address of the new user
+    * actionurl - Delete link
+
+    Example context (json):
+    {
+        "users": [{
+            "firstname" : "John",
+            "lastname" : "Doe",
+            "email" : "john@doe.com",
+            "actionurl" : "/delete.php"
+        }]
+    }
+}}
 <div>
     <table class="table">
         <tr>

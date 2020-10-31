@@ -41,6 +41,8 @@ defined('MOODLE_INTERNAL') || die;
 class helper {
 
     /**
+     * Get all users
+     *
      * @return ArrayIterator
      * @throws \moodle_exception
      */
@@ -62,10 +64,11 @@ class helper {
     }
 
     /**
+     * Get course ids from settings
+     *
      * @return array
      * @throws \dml_exception
      */
-
     public static function get_courseids_from_settings() : array {
         $results = [];
         $courseids = get_config('block_createuser', 'courseids');
@@ -82,6 +85,8 @@ class helper {
     }
 
     /**
+     * Get all roles
+     *
      * @return array
      * @throws \dml_exception
      */
@@ -115,7 +120,7 @@ class helper {
     }
 
     /**
-     * update_user_profile_value
+     * Update user profile value
      *
      * @param int    $userid
      * @param int    $fieldid

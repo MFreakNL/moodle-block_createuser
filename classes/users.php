@@ -41,7 +41,7 @@ require_once($CFG->dirroot.'/group/lib.php');
 class users {
 
     /**
-     * create_task_form_wizard
+     * Create task from wizard
      *
      * @param array $users
      * @throws \dml_exception
@@ -105,7 +105,7 @@ class users {
     }
 
     /**
-     * create_users
+     * Create user
      *
      * @param array $users
      * @param int   $createdby
@@ -115,6 +115,8 @@ class users {
     }
 
     /**
+     * Enrol
+     *
      * @param int $courseid
      * @param     $key
      * @param     $userdata
@@ -158,8 +160,8 @@ class users {
             ENROL_USER_ACTIVE,
             true
         );
-        $groupsfrommanager = self::get_manager_groups($courseid, $userdata['createdby']);
 
+        $groupsfrommanager = self::get_manager_groups($courseid, $userdata['createdby']);
         if (empty($groupsfrommanager)) {
             return;
         }

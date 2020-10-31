@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * Create user form
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -44,7 +44,7 @@ require_once($CFG->libdir . '/formslib.php');
 class form_new_users extends \moodleform {
 
     /**
-     * 
+     * @throws \coding_exception
      */
     protected function definition() : void {
         $mform = &$this->_form;
@@ -76,13 +76,17 @@ class form_new_users extends \moodleform {
      *
      * @return array of "element_name"=>"error_description" if there are errors,
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
-    function validation($data, $files) {
+    public function validation($data, $files) : array{
         global $DB;
         $errors = parent::validation($data, $files);
+
         if ($DB->record_exists('user', ['email' => $data['email']])) {
             $errors['email'] = get_string('error:email_used', 'block_createuser');
         }
+
         if ($DB->record_exists('user', ['username' => $data['email']])) {
             $errors['email'] = get_string('error:username_used', 'block_createuser');
         }

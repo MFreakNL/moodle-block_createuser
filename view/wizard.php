@@ -53,6 +53,7 @@ $PAGE->set_heading($SITE->fullname);
 /** @var block_createuser_renderer $renderer */
 $renderer = $PAGE->get_renderer('block_createuser');
 switch ($action) {
+
     case 'addtask':
         users::create_task_form_wizard($SESSION->block_createuser);
         users::unset_session();

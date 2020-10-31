@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * UI renders
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
@@ -38,7 +38,9 @@ require_once($CFG->libdir . '/tablelib.php');
  * @author    Wishal Fakira
  */
 class block_createuser_renderer extends plugin_renderer_base {
+
     /**
+     * Button wizard
      *
      * @param array $params
      *
@@ -47,17 +49,19 @@ class block_createuser_renderer extends plugin_renderer_base {
      */
     public function button_wizard(array $params) : string {
         return html_writer::link(new moodle_url('/blocks/createuser/view/wizard.php', $params),
-            new lang_string('btn:admin', 'block_createuser'), ['class' => 'btn btn-primary']);
+            get_string('btn:admin', 'block_createuser'), ['class' => 'btn btn-primary']);
     }
 
     /**
+     * Table wizard users
+     *
      * @return string
+     * @throws moodle_exception
      */
     public function table_wizard_users() : string {
         $templatedata = new stdClass();
         $templatedata->users = \block_createuser\helper::get_all_users();
 
-        return $this->render_from_template('block_createuser/overview_users',
-            $templatedata);
+        return $this->render_from_template('block_createuser/overview_users',$templatedata);
     }
 }

@@ -65,6 +65,7 @@ class users {
      * create_single_user
      *
      * @param array $user
+     * @param int   $key
      * @param array $data
      */
     protected static function create_single_user(array $user, int $key, array $data) : void {

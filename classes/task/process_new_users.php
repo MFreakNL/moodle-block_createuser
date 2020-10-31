@@ -45,6 +45,8 @@ use core\task\scheduled_task;
 class process_new_users extends scheduled_task {
 
     /**
+     * Get name
+     *
      * @return \lang_string|string
      * @throws \coding_exception
      */

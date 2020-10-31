@@ -23,6 +23,16 @@
  * @copyright 16-09-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Wishal Fakira
  **/
+
+/**
+ * Class block_createuser
+ *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ * @package   block_createuser
+ * @copyright 31-10-20 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
+ * @author    Wishal Fakira
+ */
 class block_createuser extends block_base {
 
     /**

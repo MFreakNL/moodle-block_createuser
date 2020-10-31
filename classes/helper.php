@@ -136,20 +136,20 @@ class helper {
             'fieldid' => $fieldid,
         ]);
 
-        $dataObject = new stdClass();
-        $dataObject->userid = $userid;
-        $dataObject->fieldid = $fieldid;
-        $dataObject->data = s($value);
+        $record = new stdClass();
+        $record->userid = $userid;
+        $record->fieldid = $fieldid;
+        $record->data = s($value);
 
         if (!$row) {
-            $DB->insert_record('user_info_data', $dataObject);
+            $DB->insert_record('user_info_data', $record);
 
             return;
         }
 
         if ($value !== $row->data) {
-            $dataObject->id = $row->id;
-            $DB->update_record('user_info_data', $dataObject);
+            $record->id = $row->id;
+            $DB->update_record('user_info_data', $record);
         }
     }
 

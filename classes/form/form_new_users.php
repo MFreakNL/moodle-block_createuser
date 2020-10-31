@@ -79,7 +79,7 @@ class form_new_users extends \moodleform {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function validation($data, $files) : array{
+    public function validation($data, $files) : array {
         global $DB;
         $errors = parent::validation($data, $files);
 

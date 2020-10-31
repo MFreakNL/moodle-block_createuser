@@ -62,6 +62,6 @@ class block_createuser_renderer extends plugin_renderer_base {
         $templatedata = new stdClass();
         $templatedata->users = \block_createuser\helper::get_all_users();
 
-        return $this->render_from_template('block_createuser/overview_users',$templatedata);
+        return $this->render_from_template('block_createuser/overview_users', $templatedata);
     }
 }

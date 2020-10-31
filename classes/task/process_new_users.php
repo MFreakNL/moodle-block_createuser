@@ -25,14 +25,13 @@
  **/
 
 namespace block_createuser\task;
+defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->dirroot . '/user/lib.php');
 
 use block_createuser\users;
 use core\task\scheduled_task;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class process_new_users
@@ -64,7 +63,7 @@ class process_new_users extends scheduled_task {
         ]);
 
         foreach ($wizarddata as $data) {
-            users::create_users(json_decode($data->usersdata, true), (int) $data->createdby);
+            users::create_users(json_decode($data->usersdata, true), (int)$data->createdby);
         }
 
         $DB->delete_records('block_createuser', [

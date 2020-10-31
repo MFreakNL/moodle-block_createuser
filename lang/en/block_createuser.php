@@ -42,9 +42,9 @@ $string['error:email'] = 'Invalid email address';
 $string['error:email_used'] = 'Email adress already used';
 
 // Buttons.
-$string['btn:submit'] = 'Send';
+$string['btn:submit'] = 'Create users';
 $string['btn:delete'] = 'Delete';
-$string['btn:add'] = 'Add';
+$string['btn:add'] = 'Add user';
 $string['btn:admin'] = 'Add Users';
 
 // Heading.

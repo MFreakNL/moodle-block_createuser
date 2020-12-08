@@ -63,7 +63,7 @@ switch ($action) {
 
     case 'deleteuser':
         formwizard::delete_user($index);
-        redirect(new moodle_url($PAGE->url->get_path(), [
+        redirect(new moodle_url('/blocks/createuser/view/wizard.php', [
             'blockid' => $blockid,
             'action' => '',
         ]));

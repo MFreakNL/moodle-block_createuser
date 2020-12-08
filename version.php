@@ -25,7 +25,7 @@
  **/
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020111300;
+$plugin->version = 2020120800;
 $plugin->release = '3.9.0';
 $plugin->requires = 2019052000;
 $plugin->component = 'block_createuser';
